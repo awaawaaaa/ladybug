@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LadyBug - Learn Coding</title>
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">🐞</span>
+      <strong>LadyBug</strong>
+    </div>
+    <button id="header-avatar" class="header-avatar">🐞</button>
+  </header>
+
+  <main id="app" class="main-content">
+
+    <!-- SPLASH -->
+    <section class="screen active" id="screen-splash">
+      <div class="splash-content">
+        <div class="splash-logo">🐞</div>
+        <h1>Welcome to LadyBug!</h1>
+        <p>Belajar coding jadi lebih seru dan menyenangkan.</p>
+        <button class="btn btn-primary btn-wide" data-screen="login">
+          Mulai Belajar
+        </button>
+      </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section class="screen" id="screen-login">
+      <button class="back-button" data-screen="splash">← Kembali</button>
+      <div class="page-heading">
+        <h1>Halo, Learner!</h1>
+        <p>Kenalan dulu yuk dengan LadyBug.</p>
+      </div>
+
+      <form id="login-form" class="panel">
+        <label for="username">Nama kamu</label>
+        <input id="username" type="text" placeholder="Masukkan nama..." required>
+        <button class="btn btn-primary btn-wide" type="submit">
+          Lanjutkan
+        </button>
+      </form>
+    </section>
+
+    <!-- COURSE -->
+    <section class="screen" id="screen-course">
+      <div class="page-heading">
+        <p class="eyebrow">LEARNING PATH</p>
+        <h1>Pilih Materi Belajar</h1>
+        <p>Mulai perjalanan coding-mu!</p>
+      </div>
+
+      <div id="course-list" class="course-list">
+        <button class="panel course-card" data-course="python">
+          <span class="course-icon">🐍</span>
+          <div>
+            <h3>Python Basics</h3>
+            <p>Belajar dasar pemrograman Python.</p>
+          </div>
+          <span>→</span>
+        </button>
+
+        <button class="panel course-card" data-course="web">
+          <span class="course-icon">🌐</span>
+          <div>
+            <h3>Web Development</h3>
+            <p>Kenali HTML, CSS, dan JavaScript.</p>
+          </div>
+          <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- HOME -->
+    <section class="screen" id="screen-home">
+      <div class="welcome-section">
+        <p class="eyebrow">LET'S LEARN TODAY!</p>
+        <h1>Hai, <span id="welcome-name">Learner</span>! 👋</h1>
+        <p>Siap meningkatkan skill coding kamu?</p>
+      </div>
+
+      <div class="panel xp-panel">
+        <div>
+          <small>Total Experience</small>
+          <h2><span id="home-xp">0</span> XP</h2>
+          <p>Level <span id="home-level">1</span></p>
+        </div>
+        <span class="xp-icon">⭐</span>
+      </div>
+
+      <div class="section-title">
+        <h2>Learning Progress</h2>
+        <span id="progress-text">0%</span>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <div class="section-title">
+        <h2>Continue Learning</h2>
+        <button class="text-button" data-screen="course">Lihat semua</button>
+      </div>
+
+      <div class="panel course-card" data-course="python">
+        <span class="course-icon">🐍</span>
+        <div>
+          <h3>Python Basics</h3>
+          <p>Mulai belajar pemrograman.</p>
+        </div>
+        <span>→</span>
+      </div>
+
+      <div class="section-title">
+        <h2>Explore More</h2>
+      </div>
+
+      <div class="feature-grid">
+        <button class="panel feature-card" data-screen="quiz">
+          <span>📝</span>
+          <strong>Mini Quiz</strong>
+          <small>Uji pemahamanmu</small>
+        </button>
+
+        <button class="panel feature-card" data-screen="practice">
+          <span>💻</span>
+          <strong>Practice</strong>
+          <small>Latihan coding</small>
+        </button>
+
+        <button class="panel feature-card" data-screen="quick">
+          <span>⚡</span>
+          <strong>Quick Challenge</strong>
+          <small>Tantangan cepat</small>
+        </button>
+
+        <button class="panel feature-card" data-screen="leaderboard">
+          <span>🏆</span>
+          <strong>Leaderboard</strong>
+          <small>Lihat peringkat</small>
+        </button>
+      </div>
+    </section>
+
+    <!-- LESSON -->
+    <section class="screen" id="screen-lesson">
+      <button class="back-button" data-screen="course">← Kembali</button>
+      <div id="lesson-content"></div>
+      <button id="complete-lesson" class="btn btn-primary btn-wide">
+        Selesaikan Pelajaran
+      </button>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="screen" id="screen-quiz">
+      <button class="back-button" data-screen="practice">← Kembali</button>
+      <div class="page-heading">
+        <p class="eyebrow">MINI QUIZ</p>
+        <h1>Test Your Knowledge</h1>
+        <p id="quiz-progress">Pertanyaan 1</p>
+      </div>
+      <div class="panel">
+        <h2 id="quiz-question">Pertanyaan akan muncul di sini.</h2>
+        <div id="quiz-options" class="quiz-options"></div>
+      </div>
+      <p id="quiz-feedback"></p>
+      <button id="next-question" class="btn btn-primary btn-wide" disabled>
+        Selanjutnya
+      </button>
+    </section>
+
+    <!-- QUIZ RESULT -->
+    <section class="screen" id="screen-quiz-result">
+      <div class="result-content">
+        <span class="result-icon">🎉</span>
+        <h1>Quiz Selesai!</h1>
+        <h2 id="quiz-score">0 XP</h2>
+        <p>Terus tingkatkan kemampuanmu!</p>
+        <button class="btn btn-primary btn-wide" id="retry-quiz">
+          Coba Lagi
+        </button>
+        <button class="btn btn-outline btn-wide" data-screen="practice">
+          Kembali ke Latihan
+        </button>
+      </div>
+    </section>
+
+    <!-- PRACTICE -->
+    <section class="screen" id="screen-practice">
+      <div class="page-heading">
+        <p class="eyebrow">PRACTICE ZONE</p>
+        <h1>Let's Practice! 💻</h1>
+        <p>Asah kemampuan coding-mu melalui latihan.</p>
+      </div>
+
+      <div class="panel practice-card">
+        <span class="practice-icon">💻</span>
+        <h2>Basic Coding Practice</h2>
+        <p>Tuliskan output yang benar dari kode berikut:</p>
+        <pre><code>print("Hello LadyBug!")</code></pre>
+        <input id="practice-answer" type="text"
+          placeholder="Masukkan jawabanmu...">
+        <button id="check-practice" class="btn btn-primary btn-wide">
+          Periksa Jawaban
+        </button>
+        <p id="practice-feedback"></p>
+      </div>
+
+      <div class="section-title">
+        <h2>More Challenges</h2>
+      </div>
+
+      <div class="panel practice-extra">
+        <span>⚡</span>
+        <div>
+          <strong>Quick Challenge</strong>
+          <p>Jawab pertanyaan secepat mungkin.</p>
+        </div>
+        <button class="btn btn-outline" data-screen="quick">Mulai</button>
+      </div>
+
+      <div class="panel practice-extra">
+        <span>📝</span>
+        <div>
+          <strong>Mini Quiz</strong>
+          <p>Uji pemahaman materi coding.</p>
+        </div>
+        <button class="btn btn-outline" data-screen="quiz">Mulai</button>
+      </div>
+    </section>
+
+    <!-- QUICK CHALLENGE -->
+    <section class="screen" id="screen-quick">
+      <button class="back-button" data-screen="practice">← Kembali</button>
+      <div class="page-heading">
+        <p class="eyebrow">QUICK CHALLENGE</p>
+        <h1>Beat the Clock! ⚡</h1>
+        <p>Jawab pertanyaan sebelum waktunya habis.</p>
+      </div>
+
+      <div class="panel quick-panel">
+        <h2><span id="quick-timer">30</span>s</h2>
+        <h3 id="quick-question">Siap untuk tantangan?</h3>
+        <div id="quick-options" class="quiz-options"></div>
+        <p id="quick-score">Score: 0</p>
+        <button id="start-quick" class="btn btn-primary btn-wide">
+          Mulai Tantangan
+        </button>
+      </div>
+    </section>
+
+    <!-- QUICK RESULT -->
+    <section class="screen" id="screen-quick-result">
+      <div class="result-content">
+        <span class="result-icon">⚡</span>
+        <h1>Time's Up!</h1>
+        <h2 id="quick-final-score">0</h2>
+        <p>Jawaban benar kamu.</p>
+        <button class="btn btn-primary btn-wide" id="retry-quick">
+          Main Lagi
+        </button>
+        <button class="btn btn-outline btn-wide" data-screen="practice">
+          Kembali ke Latihan
+        </button>
+      </div>
+    </section>
+
+    <!-- LEADERBOARD -->
+    <section class="screen" id="screen-leaderboard">
+      <div class="page-heading">
+        <p class="eyebrow">LADYBUG LEAGUE</p>
+        <h1>Leaderboard 🏆</h1>
+        <p>Terus kumpulkan XP dan naikkan peringkatmu!</p>
+      </div>
+      <div id="leaderboard-list" class="leaderboard-list"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="screen" id="screen-profile">
+
+      <div class="profile-topline">
+        <button class="back-button" data-screen="home">← Kembali</button>
+        <span class="profile-menu-dot">•••</span>
+      </div>
+
+      <div class="profile-header">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar">🐞</div>
+          <span class="profile-online-dot"></span>
+        </div>
+
+        <h1 id="profile-name">Learner</h1>
+
+        <p class="profile-league">
+          🥉 <b>BRONZE LEAGUE</b>
+          <i></i>
+          LEVEL <span id="profile-level">1</span>
+        </p>
+      </div>
+
+      <!-- PROFILE STATISTICS -->
+      <div class="stats-grid profile-stats">
+
+        <div class="panel stat-card">
+          <span class="stat-icon">🔥</span>
+          <strong id="profile-streak">1</strong>
+          <span>Day Streak</span>
+        </div>
+
+        <div class="panel stat-card">
+          <span class="stat-icon">⚡</span>
+          <strong id="profile-xp">0</strong>
+          <span>Total XP</span>
+        </div>
+
+        <div class="panel stat-card">
+          <span class="stat-icon">📚</span>
+          <strong id="profile-lessons">0</strong>
+          <span>Pelajaran</span>
+        </div>
+
+      </div>
+
+      <!-- BADGES -->
+      <div class="section-title profile-section-title">
+        <h2>My Badges</h2>
+        <span id="badge-count">0/8</span>
+      </div>
+
+      <p class="profile-section-subtitle">
+        Kumpulkan badge dengan menyelesaikan tantangan!
+      </p>
+
+      <div id="profile-badges" class="badge-grid"></div>
+
+      <!-- SETTINGS -->
+      <div class="section-title profile-section-title">
+        <h2>Pengaturan</h2>
+      </div>
+
+      <div class="settings-list">
+
+        <label class="setting-row">
+          <span class="setting-icon">🔔</span>
+          <span class="setting-copy">
+            <b>Pengingat harian</b>
+            <small>Ingatkan aku untuk belajar setiap hari</small>
+          </span>
+          <input type="checkbox" id="daily-reminder"
+            class="setting-toggle">
+          <span class="toggle-ui"></span>
+        </label>
+
+        <label class="setting-row">
+          <span class="setting-icon">🔊</span>
+          <span class="setting-copy">
+            <b>Efek suara</b>
+            <small>Aktifkan efek suara aplikasi</small>
+          </span>
+          <input type="checkbox" id="sound-effects"
+            class="setting-toggle" checked>
+          <span class="toggle-ui"></span>
+        </label>
+
+      </div>
+
+      <button class="btn btn-outline btn-wide profile-reset"
+        id="reset-progress">
+        Reset Progress Demo
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- BOTTOM NAVIGATION: 4 BUTTONS -->
+  <nav class="bottom-nav" id="bottom-nav"
+    aria-label="Navigasi utama">
+
+    <button class="nav-item active" data-screen="home">
+      <span>⌂</span>
+      <small>Belajar</small>
+    </button>
+
+    <button class="nav-item" data-screen="practice">
+      <span>✍</span>
+      <small>Latihan</small>
+    </button>
+
+    <button class="nav-item" data-screen="leaderboard">
+      <span>♛</span>
+      <small>Liga</small>
+    </button>
+
+    <button class="nav-item" data-screen="profile">
+      <span>●</span>
+      <small>Profil</small>
+    </button>
+
+  </nav>
+
+</div>
+
+<script src="src/js/data.js"></script>
+<script src="src/js/app.js"></script>
+
+</body>
+</html>
